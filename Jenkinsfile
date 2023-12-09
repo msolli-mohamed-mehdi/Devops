@@ -10,7 +10,7 @@ def targetBranch
 pipeline {
   agent any
 	environment {
-     DOCKERHUB_USERNAME = "MohamedMehdiMsolli"
+     DOCKERHUB_USERNAME = "mohamedmehdimsolli"
      PROD_TAG = "${DOCKERHUB_USERNAME}/eventsproject:v1.0-prod"
     }
 	parameters {
@@ -124,7 +124,7 @@ stage ('JUNIT TEST') {
         }
     }
             steps{
-                withCredentials([usernamePassword(credentialsId: '5cbdeb85-0052-4996-8a99-0fa003e7319f	', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: '5cbdeb85-0052-4996-8a99-0fa003e7319f', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
     }
   }
