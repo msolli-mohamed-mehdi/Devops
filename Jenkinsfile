@@ -88,20 +88,20 @@ stage('MVN COMPILE') {
 
 
 	  
-// 	stage('Build Docker') {
-//     when {
-//         expression {
-//           (params.CHANGE_ID != null) && ((targetBranch == 'Categorie_Produit'))
-//         }
-//     }
-//     steps {
-//         script {
-//             if (targetBranch == 'Categorie_Produit') {
-//                 sh "docker build -t ${PROD_TAG} ."
-//             } 
-//         }
-//     }
-// }
+	stage('Build Docker') {
+    when {
+        expression {
+          (params.CHANGE_ID != null) && ((targetBranch == 'master'))
+        }
+    }
+    steps {
+        script {
+            if (targetBranch == 'master') {
+                sh "docker build -t ${PROD_TAG} ."
+            } 
+        }
+    }
+}
 
 
 
