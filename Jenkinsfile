@@ -60,6 +60,18 @@ stage('MVN COMPILE') {
       }
     }
 
+stage ('JUNIT TEST') {
+	when {
+         expression {
+           (params.CHANGE_ID != null) && ((targetBranch == 'master'))
+            }
+	   }
+      steps {
+        sh 'mvn test'
+        echo 'test stage done'
+      }
+    }
+
 
 
 	stage ('STATIC TEST WITH SONAR') {
@@ -105,19 +117,19 @@ stage('MVN COMPILE') {
 
 
 
-	 //  stage('Docker Login'){
-	 //     when {
-  //       expression {
-  //         (params.CHANGE_ID != null) && ((targetBranch == 'Categorie_Produit'))
-  //       }
-  //   }
-  //           steps{
-  //               withCredentials([usernamePassword(credentialsId: '928642c1-11a7-49cf-8d04-e89186dc78a1', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-  //               sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
-  //   }
-  // }
+	  stage('Docker Login'){
+	     when {
+        expression {
+          (params.CHANGE_ID != null) && ((targetBranch == 'master'))
+        }
+    }
+            steps{
+                withCredentials([usernamePassword(credentialsId: '5cbdeb85-0052-4996-8a99-0fa003e7319f	', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+    }
+  }
 
-  //       }
+        }
 
 
 
