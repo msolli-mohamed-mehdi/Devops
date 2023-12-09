@@ -10,7 +10,7 @@ def targetBranch
 pipeline {
   agent any
 	environment {
-     DOCKERHUB_USERNAME = "msolli-mohamed-mehdi"
+     DOCKERHUB_USERNAME = "mohamedmehdimsolli"
      PROD_TAG = "${DOCKERHUB_USERNAME}/eventsproject:v1.0-prod"
     }
 	parameters {
