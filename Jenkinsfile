@@ -124,7 +124,7 @@ stage ('JUNIT TEST') {
         }
     }
             steps{
-                withCredentials([usernamePassword(credentialsId: '5cbdeb85-0052-4996-8a99-0fa003e7319f', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: '9bffddde-13dc-4703-89f7-d53edda4a6bc', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
     }
   }
