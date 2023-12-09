@@ -133,16 +133,16 @@ stage ('JUNIT TEST') {
 
 
 
-	// stage('Docker Push'){
-	// 	when {
- //        expression {
- //          (params.CHANGE_ID != null) && ((targetBranch == 'Categorie_Produit'))
- //        }
- //    }
- //            steps{
- //                sh 'docker push $DOCKERHUB_USERNAME/achat --all-tags '
- //            }
- //        }
+	stage('Docker Push'){
+		when {
+        expression {
+          (params.CHANGE_ID != null) && ((targetBranch == 'master'))
+        }
+    }
+            steps{
+                sh 'docker push $DOCKERHUB_USERNAME/eventsproject --all-tags '
+            }
+        }
 
 
 
