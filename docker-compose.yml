@@ -1,33 +1,33 @@
 version: "3.8"
 
-networks:
-  backendNetwork:  # Define a custom network
-    driver: bridge
-
 services:
   mysqldb:
     image: mysql:5.7
     container_name: mysqldb
     restart: unless-stopped
     ports:
-      - 3306:3306
+      - "3306:3306" # Host:Container port mapping
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: eventsProject
     volumes:
       - db:/var/lib/mysql
     networks:
-      - backendNetwork
+      - backendNetwork  # Attach to the custom network
 
-  achat-backend:
+  eventsProject-backend:
     image: mohamedmehdimsolli/eventsproject:v1.0-prod
     restart: unless-stopped
     ports:
-      - 8089:8089
+      - "8089:8089" # Host:Container port mapping
     depends_on:
       - mysqldb
     networks:
       - backendNetwork  # Attach to the custom network
 
+networks:
+  backendNetwork:  # Define a custom network
+    driver: bridge
+
 volumes:
-  db:  # Volume for mysqldb
+  db: # Volume for mysqldb
