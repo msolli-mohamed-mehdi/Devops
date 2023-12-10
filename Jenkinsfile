@@ -146,6 +146,19 @@ stage ('JUNIT TEST') {
 
 
 
+	  stage('DOCKER COMPOSE') {
+    when {
+        expression {
+            (params.CHANGE_ID != null) && (targetBranch == 'master')
+        }
+    }
+    steps {
+	sh "docker-compose down -v"
+        sh "docker-compose -f docker-compose.yml up -d"
+    }
+	}
+
+	
 	  
 
 	  
