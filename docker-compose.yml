@@ -1,1 +1,33 @@
+version: "3.8"
 
+networks:
+  backendNetwork:  # Define a custom network
+    driver: bridge
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: achatdb
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - backendNetwork
+
+  achat-backend:
+    image: mohamedmehdimsolli/eventsproject:v1.0-prod
+    restart: unless-stopped
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
+    networks:
+      - backendNetwork  # Attach to the custom network
+
+volumes:
+  db:  # Volume for mysqldb
